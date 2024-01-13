@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<h1>Player management</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>MODEL</th>
+        <th>BRAND</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tr th:each="car: ${cars}">
+        <td th:text="${car.model}">MODEL</td>
+        <td th:text="${car.brand}">BRAND</td>
+
+        <td></td>
+    </tr>
+</table>
+
+</body>
+</html>
