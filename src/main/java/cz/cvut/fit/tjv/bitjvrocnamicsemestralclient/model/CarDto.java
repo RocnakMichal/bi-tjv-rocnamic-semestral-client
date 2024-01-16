@@ -21,6 +21,9 @@ public class CarDto extends AbstractDtoWithId<Long>{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d.M.yyyy")
     private LocalDate boughtIn;
 
+
+
+
     CarDto(){}
     public CarDto(CarDto other){
         id=other.id;

@@ -1,5 +1,7 @@
 package cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.data;
 
+
+import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.filter.LoggingFilter;
 import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.AbstractDtoWithId;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,6 +16,7 @@ public abstract class AbstractClient<WM extends DTO, DTO extends AbstractDtoWith
     public AbstractClient(String backendUrl, String url, Class<WM> wmClass) {
         webClient = WebClient.builder()
                 .baseUrl(backendUrl + url)
+                .filter(new LoggingFilter())
                 .build();
         this.wmClass = wmClass;
     }

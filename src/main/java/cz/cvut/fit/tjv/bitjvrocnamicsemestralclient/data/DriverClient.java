@@ -5,8 +5,10 @@ import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.DriverDto;
 import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.DriverWebModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,7 +16,7 @@ import java.util.stream.Collectors;
 public class DriverClient extends AbstractClient<DriverWebModel, DriverDto, Long>{
 
 
-    protected final String FT_URI = ONE_URI + "/car";
+    protected final String DRV_URI = ONE_URI + "/car";
 
     public DriverClient (@Value("${backend_url}") String backendUrl) {
         super(backendUrl, "/driver", DriverWebModel.class);
@@ -31,7 +33,7 @@ public class DriverClient extends AbstractClient<DriverWebModel, DriverDto, Long
 
 
         Mono<Set<CarDto>> carDto = webClient.get()
-                .uri(FT_URI, id)
+                .uri(DRV_URI, id)
                 .retrieve()
                 .bodyToFlux(CarDto.class)
                 .collect(Collectors.toSet());
@@ -41,6 +43,8 @@ public class DriverClient extends AbstractClient<DriverWebModel, DriverDto, Long
                .map(tuple -> new DriverWebModel(tuple.getT1(), tuple.getT2()));
 
     }
+
+
 
     @Override
     public DriverWebModel newWM() {

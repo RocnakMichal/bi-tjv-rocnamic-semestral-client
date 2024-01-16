@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <script th:inline="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        /* {% block javascript %} */
+        $(document).ready(function() {
+            var numOptions = $('#driver option').length;
+            if (numOptions <= 5) {
+                $('#driver').attr('size', numOptions);
+            } else {
+                $('#driver').attr('size', 5);
+            }
+        });
+    </script>
+</head>
+<body>
+<header>
+    <nav class="main_nav">
+        <!-- {% block headerNav %} -->
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/car">Cars</a></li>
+            <li><a href="/driver">Drivers</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Creating car</h1>
+    <form action="#" method="post" th:object="${car}">
+        <label for="licence_plate">Licence Plate:</label>
+        <input type="text" id="licence_plate" name="licence_plate" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" name="brand" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+
+
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+
+        <label for="boughtIn">bought_in:</label>
+        <input type="date" id="boughtIn" name="boughtIn" ><br>
+
+
+        <label for="driver">Driver:</label>
+        <select id="driver" name="DriverId" required>
+            <option th:each="driver : ${drivers}" th:value="${driver.id}" th:selected="${driver.id == car.driver.id}"
+                    th:text="${driver.name}">
+            </option>
+        </select><br>
+
+        <input type="submit" class="main_b button" value="Upravit">
+    </form>
+</main>
+</body>
+</html>

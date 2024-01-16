@@ -2,24 +2,48 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 
+
+
+
+
+
+<header>
+    <nav class="main_nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/car">Cars</a></li>
+            <li><a href="/driver">Drivers</a></li>
+        </ul>
+    </nav>
+</header>
+
+
 <body>
-<h1>Player management</h1>
+
+
+
+<h1>Car management</h1>
 <table class="table">
     <thead>
     <tr>
         <th>MODEL</th>
         <th>BRAND</th>
-        <th></th>
-        <th></th>
-        <th></th>
+
     </tr>
     </thead>
+    <tbody>
     <tr th:each="car: ${cars}">
-        <td th:text="${car.model}">MODEL</td>
-        <td th:text="${car.brand}">BRAND</td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.brand}"></td>
 
         <td></td>
     </tr>
+    <tr>
+    <td>
+       <button> <a th:href="@{/car/create}">Create car</a></button>
+    </td>
+    </tr>
+    </tbody>
 </table>
 
 </body>

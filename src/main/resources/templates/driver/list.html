@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<header>
+    <nav class="main_nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/car">Cars</a></li>
+            <li><a href="/driver">Drivers</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Drivers</h1>
+    <table class="main_table">
+
+
+
+
+
+        <thead>
+
+
+        <tr>
+            <th>NAME</th>
+            <th>SURNAME</th>
+
+        </tr>
+        </thead>
+
+        <tr th:each="driver: ${drivers}">
+            <td th:text="${driver.name}"></td>
+            <td th:text="${driver.surname}"></td>
+
+        <tbody>
+        <tr th:each="driver : ${drivers}">
+            <td>
+                <nav class="more">
+                    <a th:href="@{/driver/{id}(id=${driver.id})}" th:text="${driver.name}"></a>
+                </nav>
+            </td>
+            <td th:text="${driver.getSurname()}"></td>
+        </tr>
+        <tr>
+            <td class="last_row" colspan="2">
+                <button> <a th:href="@{/driver/create}">Create driver</a></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

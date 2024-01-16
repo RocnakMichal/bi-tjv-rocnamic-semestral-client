@@ -59,7 +59,6 @@ public abstract class AbstractWebController<WM extends DTO, DTO extends Abstract
                 ;
     }
 
-    // postMapping because delete doesnt work
     @PostMapping("/{id}")
     public Mono<String> delete(@PathVariable ID id) {
         return client.delete(id)

@@ -24,7 +24,7 @@ public class DriverWebModel extends DriverDto {
         this.cars = cars;
     }
 
-    public Collection<CarDto> getFiretrucks() {
+    public Collection<CarDto> getCars() {
         return cars;
     }
 

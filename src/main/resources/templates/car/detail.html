@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<header>
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/car}">Cars</a>
+        <a th:href="@{/driver}">Drivers</a>
+    </nav>
+</header>
+
+<main>
+    <nav class="actions">
+        <ul>
+            <li><a th:href="@{/car/{id}/edit(id=${car.id})}" class="main_b button">Upravit</a></li>
+            <li>
+                <form id="deleteForm" th:action="@{/car/{id}(id=${car.id})}" method="post">
+                    <label>
+                        <input th:type="submit" th:value="Smazat" class="main_b button"
+                               th:data-confirm-delete="|Jsi si jistý že chceš smazat hasičské auto ${car.id}|"
+                               onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
+                    </label>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="details">
+
+        <section style="grid-column: 1 / span 1; grid-row: 1 / span 1;">
+            <h2>detail</h2>
+            <ul>
+                <li>Licence Plate: [[${car.licence_plate}]]</li>
+                <li>Model: [[${car.model}]]</li>
+
+                <li>driver: <a th:href="@{/driver/{id}(id=${car.driver.id})}" th:text="${car.driver.name}"></a></li>
+            </ul>
+        </section>
+    </div>
+</main>
+</body>
+</html>

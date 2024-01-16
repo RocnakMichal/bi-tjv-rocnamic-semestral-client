@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body><!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<header>
+    <nav class="main_nav">
+        <!-- {% block headerNav %} -->
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/car">Cars</a></li>
+            <li><a href="/driver">Drivers</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Creating car</h1>
+    <form action="#" method="post" th:object="${driver}">
+        <label for="name">name:</label>
+        <input type="text" id="name" name="name" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+
+
+        <input type="submit" class="main_b button" value="Upravit">
+    </form>
+</main>
+</body>
+</html>
+</html>
