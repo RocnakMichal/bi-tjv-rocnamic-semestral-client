@@ -2,11 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 
-
-
-
-
-
 <header>
     <nav class="main_nav">
         <ul>
@@ -21,27 +16,33 @@
 <body>
 
 
-
 <h1>Car management</h1>
 <table class="table">
     <thead>
     <tr>
+        <th>LICENCE PLATE</th>
         <th>MODEL</th>
         <th>BRAND</th>
-
+        <th>BOUGHT IN</th>
+        <th>DRIVER NAME</th>
+        <th>DRIVER SURNAME</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="car: ${cars}">
+        <td>
+            <a th:href="@{/car/{id}(id=${car.id})}" th:text="${car.licence_plate}"></a>
+        </td>
         <td th:text="${car.model}"></td>
         <td th:text="${car.brand}"></td>
-
-        <td></td>
+        <td th:text="${car.boughtIn}"></td>
+        <td th:text="${car.driver.name}"></td>
+        <td th:text="${car.driver.surname}"></td>
     </tr>
     <tr>
-    <td>
-       <button> <a th:href="@{/car/create}">Create car</a></button>
-    </td>
+        <td>
+            <button><a th:href="@{/car/create}">Create car</a></button>
+        </td>
     </tr>
     </tbody>
 </table>

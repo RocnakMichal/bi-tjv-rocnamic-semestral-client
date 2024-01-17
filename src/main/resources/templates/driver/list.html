@@ -18,41 +18,27 @@
 <main>
     <h1>Drivers</h1>
     <table class="main_table">
-
-
-
-
-
         <thead>
-
-
         <tr>
             <th>NAME</th>
             <th>SURNAME</th>
-
         </tr>
         </thead>
-
-        <tr th:each="driver: ${drivers}">
-            <td th:text="${driver.name}"></td>
-            <td th:text="${driver.surname}"></td>
-
         <tbody>
-        <tr th:each="driver : ${drivers}">
+        <tr th:each="driver: ${drivers}">
             <td>
-                <nav class="more">
-                    <a th:href="@{/driver/{id}(id=${driver.id})}" th:text="${driver.name}"></a>
-                </nav>
+                <a th:href="@{/driver/{id}(id=${driver.id})}" th:text="${driver.name}"></a>
             </td>
-            <td th:text="${driver.getSurname()}"></td>
+            <td th:text="${driver.surname}"></td>
         </tr>
         <tr>
             <td class="last_row" colspan="2">
-                <button> <a th:href="@{/driver/create}">Create driver</a></button>
+                <button><a th:href="@{/driver/create}">Create driver</a></button>
             </td>
         </tr>
         </tbody>
     </table>
+
 </main>
 </body>
 </html>
