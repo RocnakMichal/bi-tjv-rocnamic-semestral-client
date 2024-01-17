@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+
 <head>
     <style>
         body {
@@ -35,8 +41,20 @@
     <a th:href="@{/driver}">Drivers</a>
     <a th:href="@{/company}">Companies</a>
 </nav>
+
+
+
+<main>
+    <h1>Create Driver</h1>
+    <form action="/company/create" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50" required><br>
+
+        <label for="number_of_products">number_of_products:</label>
+        <input type="number" id="number_of_products" name="number_of_products" required><br>
+
+        <input type="submit" class="main_b button" value="Vytvořit">
+    </form>
+</main>
 </body>
-<h1>
-    HO
-</h1>
 </html>
