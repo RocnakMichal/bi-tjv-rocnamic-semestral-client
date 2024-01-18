@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="company: ${companies}">
+        <tr th:each="company: ${companys}">
             <td>
                 <a th:href="@{/company/{id}(id=${company.id})}" th:text="${company.name}"></a>
             </td>
@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <td class="last_row" colspan="2">
-                <button><a th:href="@{/comapny/create}">Create company</a></button>
+                <button><a th:href="@{/company/create}">Create company</a></button>
             </td>
         </tr>
         </tbody>

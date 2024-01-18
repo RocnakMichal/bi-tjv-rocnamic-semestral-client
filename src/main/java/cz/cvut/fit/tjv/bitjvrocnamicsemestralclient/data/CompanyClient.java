@@ -1,8 +1,7 @@
 package cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.data;
 
-import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.CompanyDto;
+import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.*;
 
-import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.CompanyWebModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -21,7 +20,14 @@ public class CompanyClient extends AbstractClient<CompanyWebModel, CompanyDto, L
     }
 
 
-
+    @Override
+    protected Mono<CompanyWebModel> readById(Long id) {
+        return webClient.get()
+                .uri(ONE_URI, id)
+                .retrieve()
+                .bodyToMono(CompanyDto.class)
+                .map(companyDto -> new CompanyWebModel(companyDto));
+    }
 
     @Override
     public CompanyWebModel newWM() {
