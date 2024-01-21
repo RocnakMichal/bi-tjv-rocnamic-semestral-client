@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <title>Company Detail: [[${company.name}]]</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,22 +28,24 @@
         }
     </style>
 </head>
-
 <body>
-
 <nav>
     <a th:href="@{/}">Home</a>
     <a th:href="@{/car}">Cars</a>
     <a th:href="@{/driver}">Drivers</a>
     <a th:href="@{/company}">Companies</a>
 </nav>
-</body>
-<h1>
-    HO
-</h1>
-
-
-
-
+<main>
+    <h1 th:text="'Choose Driver: ' + ${company.name}"></h1>
+    <form action="#" method="post" th:object="${company}">
+        <div th:each="driver : ${drivers}">
+            <label>
+                <input type="checkbox" name="driverIds" th:value="${driver.id}" th:checked="${company.driverIds.contains(driver.id)}">
+                <a th:href="@{/driver/{id}(id=${driver.id})}" target="_blank" th:text="${driver.name}"></a>
+            </label>
+        </div>
+        <button type="submit" class="main_b button">Submit</button>
+    </form>
+</main>
 </body>
 </html>

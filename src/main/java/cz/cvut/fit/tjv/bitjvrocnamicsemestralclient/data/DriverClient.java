@@ -1,6 +1,7 @@
 package cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.data;
 
 import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.CarDto;
+import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.CompanyDto;
 import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.DriverDto;
 import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.DriverWebModel;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,7 @@ public class DriverClient extends AbstractClient<DriverWebModel, DriverDto, Long
 
 
     protected final String DRV_URI = ONE_URI + "/car";
+    protected final String COM_URI = ONE_URI + "/company";
 
     public DriverClient (@Value("${backend_url}") String backendUrl) {
         super(backendUrl, "/driver", DriverWebModel.class);
@@ -38,9 +40,16 @@ public class DriverClient extends AbstractClient<DriverWebModel, DriverDto, Long
                 .bodyToFlux(CarDto.class)
                 .collect(Collectors.toSet());
 
+        Mono<Set<CompanyDto>> companyDto = webClient.get()
+                .uri(COM_URI, id)
+                .retrieve()
+                .bodyToFlux(CompanyDto.class)
+                .collect(Collectors.toSet());
 
-        return Mono.zip(driverDtoMono,  carDto)
-               .map(tuple -> new DriverWebModel(tuple.getT1(), tuple.getT2()));
+
+
+        return Mono.zip(driverDtoMono,  carDto, companyDto)
+               .map(tuple -> new DriverWebModel(tuple.getT1(), tuple.getT2(),tuple.getT3()));
 
     }
 
