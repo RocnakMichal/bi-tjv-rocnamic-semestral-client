@@ -24,6 +24,15 @@ public class DriverClient extends AbstractClient<DriverWebModel, DriverDto, Long
         super(backendUrl, "/driver", DriverWebModel.class);
     }
 
+
+    public void deleteDriversWithoutCars() {
+        webClient.get()
+                .uri("/driver/deleteWithoutCar")
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
+    }
+
     @Override
     protected Mono<DriverWebModel> readById(Long id) {
         Mono<DriverDto> driverDtoMono = webClient.get()

@@ -6,27 +6,27 @@ import java.util.Set;
 
 public class DriverWebModel extends DriverDto {
     public final Set<CarDto> cars;
-    public final Set<CompanyDto> attendees;
+    public final Set<CompanyDto> workers;
 
     public DriverWebModel() {
         cars = new HashSet<>();
-        attendees=new HashSet<>();
+        workers=new HashSet<>();
     }
 
     public DriverWebModel(DriverDto dto) {
         super(dto);
         cars = new HashSet<>();
-        attendees = new HashSet<>();
+        workers = new HashSet<>();
 
     }
 
     public DriverWebModel(DriverDto dto,
                             Set<CarDto> cars,
-    Set<CompanyDto> attendees){
+    Set<CompanyDto> workers){
         super(dto);
 
         this.cars = cars;
-        this.attendees=attendees;
+        this.workers=workers;
     }
 
     public Collection<CarDto> getCars() {
@@ -34,8 +34,8 @@ public class DriverWebModel extends DriverDto {
     }
 
 
-    public Set<CompanyDto> getAttendees() {
-        return attendees;
+    public Set<CompanyDto> getWorkers() {
+        return workers;
     }
 
 

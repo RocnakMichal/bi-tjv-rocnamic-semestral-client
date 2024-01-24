@@ -25,7 +25,7 @@ public class CompanyClient extends AbstractClient<CompanyWebModel, CompanyDto, L
 
 
 
-    public Mono<CompanyWebModel> showAttend(Long id) {
+    public Mono<CompanyWebModel> showWork(Long id) {
         Mono<CompanyWebModel> companyMono = webClient.get()
                 .uri(ONE_URI, id)
                 .retrieve()
@@ -51,22 +51,22 @@ public class CompanyClient extends AbstractClient<CompanyWebModel, CompanyDto, L
                 });
     }
 
-    public Mono<Void> attend(Long id, Set<Long> newDisIds) {
+    public Mono<Void> work(Long id, Set<Long> newDisIds) {
         return webClient.get()
                 .uri(DRIVER_URI, id)
                 .retrieve()
                 .bodyToFlux(DriverDto.class)
                 .collect(Collectors.toSet())
                 .flatMap(previousDrivers -> {
-                    Set<Long> previousAttendedIds = previousDrivers.stream()
+                    Set<Long> previousWorkerIds = previousDrivers.stream()
                             .map(driver -> driver.id)
                             .collect(Collectors.toSet());
 
-                    Set<Long> delListIds = new HashSet<>(previousAttendedIds);
+                    Set<Long> delListIds = new HashSet<>(previousWorkerIds);
                     Set<Long> addListIds = new HashSet<>(newDisIds);
 
                     delListIds.removeAll(newDisIds);
-                    addListIds.removeAll(previousAttendedIds);
+                    addListIds.removeAll(previousWorkerIds);
 
                     Flux<Void> deleteOperations = Flux.fromIterable(delListIds)
                             .flatMap(disId -> webClient.delete()

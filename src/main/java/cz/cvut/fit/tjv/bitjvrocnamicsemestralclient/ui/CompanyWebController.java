@@ -30,22 +30,22 @@ public class CompanyWebController extends AbstractWebController<CompanyWebModel,
 
 
 
-    @GetMapping("/{id}/attend")
-    public Mono<String> showAttend(@PathVariable Long id, Model model) {
-        return client.showAttend(id)
+    @GetMapping("/{id}/work")
+    public Mono<String> showWork(@PathVariable Long id, Model model) {
+        return client.showWork(id)
                 .flatMap(companyWebModel -> {
                     model.addAttribute(url, companyWebModel);
                     return driverClient.list()
                             .collectList()
                             .doOnNext(drivers -> model.addAttribute("drivers", drivers))
-                            .then(Mono.just(url + "/attend"));
+                            .then(Mono.just(url + "/work"));
                 })
                 .onErrorResume(throwable -> Mono.just("redirect:/error/" + getStatusCode(throwable)));
     }
 
-    @PostMapping("/{id}/attend")
-    public Mono<String> attend(@PathVariable Long id, @ModelAttribute CompanyWebModel wm) {
-        return client.attend(id, wm.driverIds)
+    @PostMapping("/{id}/work")
+    public Mono<String> work(@PathVariable Long id, @ModelAttribute CompanyWebModel wm) {
+        return client.work(id, wm.driverIds)
                 .then(Mono.just("redirect:/" + url + "/" + id))
                 .onErrorResume(throwable -> Mono.just("redirect:/error/" + getStatusCode(throwable)))
                 ;

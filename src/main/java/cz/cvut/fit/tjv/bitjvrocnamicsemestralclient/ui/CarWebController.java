@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import reactor.core.publisher.Mono;
 
+
+
 @Controller
 @RequestMapping("/car")
 public class CarWebController extends AbstractWebController<CarWebModel, CarDto, CarClient, Long> {
@@ -23,9 +25,6 @@ public class CarWebController extends AbstractWebController<CarWebModel, CarDto,
         super(client, "car");
         this.driverClient = driverClient;
     }
-
-
-
 
     @Override
     public Mono<String> showCreate(Model model) {

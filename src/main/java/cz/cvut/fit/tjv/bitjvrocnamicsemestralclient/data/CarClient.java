@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class CarClient extends AbstractClient<CarWebModel,CarDto, Long> {
-    protected static final String DEP_URI = ONE_URI + "/driver";
+    protected static final String DRIVER_URI = ONE_URI + "/driver";
     protected final WebClient driverWebClient;
 
     public CarClient (@Value("${backend_url}") String backendUrl) {
@@ -21,22 +21,25 @@ public class CarClient extends AbstractClient<CarWebModel,CarDto, Long> {
         driverWebClient = WebClient.create(backendUrl + "/driver");;
     }
 
+
+
+
     @Override
     public Mono<CarWebModel> create(CarWebModel wm) {
-        return driverWebClient.post() // HTTP POST
-                .uri("/{drvId}/car", wm.driverId)
+        return driverWebClient.post()
+                .uri("/{DriverId}/car", wm.driverId)
                 .contentType(MediaType.APPLICATION_JSON) // set HTTP header
-                .bodyValue(wm) // POST data
-                .retrieve() // request specification finished
+                .bodyValue(wm)
+                .retrieve()
                 .bodyToMono(CarWebModel.class) // interpret response body as one element using WM class
                 ;
     }
 
     @Override
     public Mono<Void> edit(Long id, CarWebModel carWebModel) {
-        return webClient.put() // HTTP PUT
-                .uri(DEP_URI + "/{FFId}", id, carWebModel.driverId)
-                .retrieve() // request specification finished
+        return webClient.put()
+                .uri(DRIVER_URI + "/{CarId}", id, carWebModel.driverId)
+                .retrieve()
                 .toBodilessEntity()
                 .then(Mono.defer(() -> super.edit(id, carWebModel)))
                 ;
@@ -55,10 +58,10 @@ public class CarClient extends AbstractClient<CarWebModel,CarDto, Long> {
 
 
     private Mono<CarWebModel> readDriver(CarWebModel carWebModel) {
-        return webClient.get() // /object
-                .uri(DEP_URI, carWebModel.id) // /object/{id}
-                .retrieve() // read
-                .bodyToMono(DriverDto.class) // interpret response body as WM using WM class
+        return webClient.get()
+                .uri(DRIVER_URI ,carWebModel.id)
+                .retrieve()
+                .bodyToMono(DriverDto.class)
                 .map(driverDto -> {
                     carWebModel.setDriver(driverDto);
                     return carWebModel;

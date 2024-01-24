@@ -2,11 +2,6 @@
 <html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
-</head><head>
-    <meta charset="UTF-8">
-    <title>Company detail: [[${company.name}]]</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,8 +26,10 @@
             color: black;
         }
     </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32-driver.png">
 </head>
 
+<body>
 <nav>
     <a th:href="@{/}">Home</a>
     <a th:href="@{/car}">Cars</a>
@@ -59,11 +56,13 @@
         <tr>
             <td class="last_row" colspan="2">
                 <button><a th:href="@{/driver/create}">Create driver</a></button>
+                <button>
+                    <a th:href="@{/driver/deleteWithoutCar}" onclick="return confirm('Are you sure you want to delete drivers without cars?');">Delete drivers without cars</a>
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
-
 </main>
 </body>
 </html>

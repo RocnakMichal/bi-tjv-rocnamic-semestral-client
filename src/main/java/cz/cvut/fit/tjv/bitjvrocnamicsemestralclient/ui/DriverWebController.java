@@ -20,13 +20,23 @@ import java.util.NoSuchElementException;
 
 public class DriverWebController extends AbstractWebController<DriverWebModel, DriverDto, DriverClient,Long> {
     CompanyClient companyClient;
+    DriverClient driverClient;
 
     public DriverWebController(DriverClient driverClient, CompanyClient companyClient) {
         super(driverClient, "driver");
         this.companyClient=companyClient;
+        this.driverClient=driverClient;
     }
 
-
+    @GetMapping("/deleteWithoutCar")
+    public String deleteDriversWithoutCar() {
+        try {
+            driverClient.deleteDriversWithoutCars();
+            return "redirect:/driver";
+        } catch (Exception e) {
+            return "redirect:/error";
+        }
+    }
 
     @Override
     public Mono<String> showCreate(Model model) {
