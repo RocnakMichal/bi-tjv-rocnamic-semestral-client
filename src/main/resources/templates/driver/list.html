@@ -2,6 +2,7 @@
 <html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <title>Drivers</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,8 +26,42 @@
             background-color: #ddd;
             color: black;
         }
+
+
+
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+        .table thead th {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .table tbody td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+        .table tbody td a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-block;
+            color: black;
+            border: solid 2px #ddd;
+            padding: 10px 20px;
+            text-align: center;
+        }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32-driver.png">
 </head>
 
 <body>
@@ -39,7 +74,7 @@
 
 <main>
     <h1>Drivers</h1>
-    <table class="main_table">
+    <table class="table">
         <thead>
         <tr>
             <th>NAME</th>
@@ -51,14 +86,14 @@
             <td>
                 <a th:href="@{/driver/{id}(id=${driver.id})}" th:text="${driver.name}"></a>
             </td>
-            <td th:text="${driver.surname}"></td>
+            <td>
+            <a th:href="@{/driver/{id}(id=${driver.id})}" th:text="${driver.surname}"></a>
+            </td>
         </tr>
         <tr>
             <td class="last_row" colspan="2">
-                <button><a th:href="@{/driver/create}">Create driver</a></button>
-                <button>
-                    <a th:href="@{/driver/deleteWithoutCar}" onclick="return confirm('Are you sure you want to delete drivers without cars?');">Delete drivers without cars</a>
-                </button>
+                <a class="button" th:href="@{/driver/create}" role="button">Create driver</a>
+                <a class="button" th:href="@{/driver/deleteWithoutCar}" onclick="return confirm('Are you sure you want to delete drivers without cars?');" role="button">Delete drivers without cars</a>
             </td>
         </tr>
         </tbody>

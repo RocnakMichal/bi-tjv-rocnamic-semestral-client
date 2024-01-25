@@ -7,6 +7,7 @@ import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.data.DriverClient;
 import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.CarDto;
 import cz.cvut.fit.tjv.bitjvrocnamicsemestralclient.model.CarWebModel;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,13 @@ public class CarWebController extends AbstractWebController<CarWebModel, CarDto,
         this.driverClient = driverClient;
     }
 
+
+    @GetMapping("/license-plates/{licensePlate}")
+    public Mono<ResponseEntity<Boolean>> isLicensePlateUnique(@PathVariable String licensePlate) {
+        return this.client.isLicensePlateUnique(licensePlate)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
     @Override
     public Mono<String> showCreate(Model model) {
         return driverClient.list()

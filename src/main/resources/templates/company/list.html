@@ -2,10 +2,7 @@
 <html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
-</head>
-
-<head>
+    <title>Companies</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,6 +26,40 @@
             background-color: #ddd;
             color: black;
         }
+
+
+        .table {
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+        .table thead th {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .table tbody td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+        .table tbody td a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-block;
+            color: black;
+            border: solid 2px #ddd;
+            padding: 10px 20px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -42,7 +73,7 @@
 
 <main>
     <h1>Companies</h1>
-    <table class="main_table">
+    <table class="table">
         <thead>
         <tr>
             <th>NAME</th>
@@ -58,7 +89,7 @@
         </tr>
         <tr>
             <td class="last_row" colspan="2">
-                <button><a th:href="@{/company/create}">Create company</a></button>
+                <a class="button" th:href="@{/company/create}" role="button">Create company</a>
             </td>
         </tr>
         </tbody>

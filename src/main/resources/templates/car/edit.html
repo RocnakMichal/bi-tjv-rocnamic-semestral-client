@@ -2,10 +2,10 @@
 <html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
+    <title>Car edit: [[${car.licence_plate}]]</title>
     <script th:inline="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script th:inline="javascript">
-        /* {% block javascript %} */
+
         $(document).ready(function() {
             var numOptions = $('#driver option').length;
             if (numOptions <= 5) {
@@ -15,9 +15,7 @@
             }
         });
     </script>
-</head>
 
-<head>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,6 +39,14 @@
             background-color: #ddd;
             color: black;
         }
+
+        .button {
+            display: inline-block;
+            color: black;
+            border: solid 2px #ddd;
+            padding: 10px 20px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -55,20 +61,19 @@
 </nav>
 
 <main>
-    <h1>Creating car</h1>
+    <h1>Editing car [[${car.licence_plate}]] </h1>
     <form action="#" method="post" th:object="${car}">
-        <label for="licence_plate">Licence Plate:</label>
-        <input type="text" id="licence_plate" name="licence_plate" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+
 
         <label for="brand">Brand:</label>
-        <input type="text" id="brand" name="brand" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+        <input type="text" id="brand" name="brand" th:value="${car.brand}" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
 
 
         <label for="model">Model:</label>
-        <input type="text" id="model" name="model" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+        <input type="text" id="model" name="model" th:value="${car.model}" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
 
         <label for="boughtIn">bought_in:</label>
-        <input type="date" id="boughtIn" name="boughtIn" ><br>
+        <input type="date" id="boughtIn" name="boughtIn" th:value="${car.boughtIn}" ><br>
 
 
         <label for="driver">Driver:</label>
@@ -78,7 +83,7 @@
             </option>
         </select><br>
 
-        <input type="submit" class="main_b button" value="Upravit">
+        <input type="submit" class="button" value="Edit">
     </form>
 </main>
 </body>

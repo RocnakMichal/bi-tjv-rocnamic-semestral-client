@@ -2,13 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-<head>
+    <title>Editing driver: [[${driver.surname}]]</title>
     <meta charset="UTF-8">
-    <title>Company detail: [[${company.name}]]</title>
+    <title>Driver detail: [[${driver.name}]]</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body {
@@ -33,6 +29,14 @@
             background-color: #ddd;
             color: black;
         }
+
+        .button {
+            display: inline-block;
+            color: black;
+            border: solid 2px #ddd;
+            padding: 10px 20px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -45,16 +49,16 @@
 </nav>
 
 <main>
-    <h1>Creating car</h1>
+    <h1>Editing driver</h1>
     <form action="#" method="post" th:object="${driver}">
         <label for="name">name:</label>
-        <input type="text" id="name" name="name" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+        <input type="text" id="name" name="name" th:value="${driver.name}" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
 
         <label for="surname">Surname:</label>
-        <input type="text" id="surname" name="surname" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+        <input type="text" id="surname" name="surname" th:value="${driver.surname}" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
 
 
-        <input type="submit" class="main_b button" value="Upravit">
+        <input type="submit" class="button" value="Upravit">
     </form>
 </main>
 </body>

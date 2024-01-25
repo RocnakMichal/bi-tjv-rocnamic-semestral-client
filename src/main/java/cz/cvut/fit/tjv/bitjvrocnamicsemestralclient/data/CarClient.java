@@ -11,6 +11,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.stream.Collectors;
+
 @Component
 public class CarClient extends AbstractClient<CarWebModel,CarDto, Long> {
     protected static final String DRIVER_URI = ONE_URI + "/driver";
@@ -23,7 +25,14 @@ public class CarClient extends AbstractClient<CarWebModel,CarDto, Long> {
 
 
 
-
+    public Mono<Boolean> isLicensePlateUnique(String licensePlate) {
+        return this.readAll()
+                .collectList()
+                .map(carWebModels -> !carWebModels.stream()
+                        .map(CarWebModel::getLicence_plate)
+                        .toList()
+                        .contains(licensePlate));
+    }
     @Override
     public Mono<CarWebModel> create(CarWebModel wm) {
         return driverWebClient.post()

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Cars</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,13 +25,49 @@
             background-color: #ddd;
             color: black;
         }
+
+        .table {
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+        .table thead th {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .table tbody td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+        .table tbody td a {
+            color: #333;
+            text-decoration: none;
+        }
+
+
+
+        .button {
+            display: inline-block;
+            color: black;
+            border: solid 2px #ddd;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
     </style>
 </head>
 
 <body>
 
 <nav>
-    <a th:href="@{/}">Homjyjyjyjyjye</a>
+    <a th:href="@{/}">Home</a>
     <a th:href="@{/car}">Cars</a>
     <a th:href="@{/driver}">Drivers</a>
     <a th:href="@{/company}">Companies</a>
@@ -61,7 +98,7 @@
     </tr>
     <tr>
         <td>
-            <button><a th:href="@{/car/create}">Create car</a></button>
+            <button class="button"><a th:href="@{/car/create}">Create car</a></button>
         </td>
     </tr>
     </tbody>

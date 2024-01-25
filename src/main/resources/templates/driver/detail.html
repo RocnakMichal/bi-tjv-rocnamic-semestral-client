@@ -2,8 +2,8 @@
 <html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Driver detail: [[${driver.name}]]</title>
-    <head>
+    <title>Driver detail: [[${driver.surname}]]</title>
+
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -27,6 +27,14 @@
                 background-color: #ddd;
                 color: black;
             }
+
+            .button {
+                display: inline-block;
+                color: black;
+                border: solid 2px #ddd;
+                padding: 10px 20px;
+                text-align: center;
+            }
         </style>
 
     </head>
@@ -40,7 +48,7 @@
 </nav>
 
 <main>
-    <h1>[[${driver.name}]]</h1>
+    <h1>[[${driver.surname}]]</h1>
     <div class="actions">
         <ul>
             <li><a th:href="@{/driver/{id}/edit(id=${driver.id})}" class="main_b button">Upravit</a></li>

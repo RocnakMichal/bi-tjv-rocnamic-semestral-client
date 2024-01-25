@@ -2,11 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-<head>
+    <title>Edit company : [[${company.name}]]</title>
     <meta charset="UTF-8">
     <title>Company detail: [[${company.name}]]</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -33,6 +29,14 @@
             background-color: #ddd;
             color: black;
         }
+
+        .button {
+            display: inline-block;
+            color: black;
+            border: solid 2px #ddd;
+            padding: 10px 20px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -49,13 +53,13 @@
     <form action="#" method="post" th:object="${company}">
 
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50" required><br>
+        <input type="text" id="name" name="name" th:value="${company.name}" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50" required><br>
 
         <label for="number_of_products">number_of_products:</label>
-        <input type="number" id="number_of_products" name="number_of_products" required><br>
+        <input type="number" id="number_of_products" name="number_of_products" th:value="${company.number_of_products}"required><br>
 
 
-        <input type="submit" class="main_b button" value="Upravit">
+        <input type="submit" class="button" value="Edit">
     </form>
 </main>
 </body>

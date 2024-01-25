@@ -2,11 +2,12 @@
 <html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:block="title">Create car</title>
+    <title>Create car</title>
     <style th:inline="text">
     </style>
     <script th:inline="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script th:inline="javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
         $(document).ready(function() {
             var numOptions = $('#driver option').length;
             if (numOptions <= 5) {
@@ -14,6 +15,28 @@
             } else {
                 $('#driver').attr('size', 5);
             }
+
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+
+                var licencePlate = $('#licence_plate').val();
+
+                $.ajax({
+                    method: "GET",
+                    url: "/car/license-plates/" + licencePlate, // assuming your app runs on the root url
+                    async: true,
+                })
+                    .done(function(isLicensePlateUnique) {
+                        if (isLicensePlateUnique == false) {
+                            alert('Error: Licence Plate exists! Please enter a different licence plate.');
+                        } else {
+                            $('form').unbind('submit').submit();
+                        }
+                    })
+                    .fail(function() {
+                        alert('AJAX request failed.');
+                    });
+            });
         });
     </script>
 </head>
@@ -41,6 +64,14 @@
         nav a:hover {
             background-color: #ddd;
             color: black;
+        }
+
+        .button {
+            display: inline-block;
+            color: black;
+            border: solid 2px #ddd;
+            padding: 10px 20px;
+            text-align: center;
         }
     </style>
 </head>
@@ -71,11 +102,10 @@
 
         <label for="driver">Driver:</label>
         <select id="driver" name="driverId">
-            <option value="">Select a driver</option>
             <option th:each="driver : ${drivers}" th:value="${driver.id}" th:text="${driver.name}"></option>
         </select><br>
 
-        <input type="submit" class="main_b button" value="Vytvořit">
+        <input type="submit" class="button" value="Create">
     </form>
 </main>
 </body>

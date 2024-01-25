@@ -27,6 +27,17 @@
             background-color: #ddd;
             color: black;
         }
+
+        .button {
+            display: inline-block;
+            color: black;
+            border: solid 2px #ddd;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+
+
     </style>
 
 </head>
@@ -42,11 +53,11 @@
     <h1>[[${company.name}]]</h1>
     <section class="actions">
         <ul>
-            <li><a th:href="@{/company/{id}/edit(id=${company.id})}" class="main_b button">Upravit</a></li>
+            <li><a th:href="@{/company/{id}/edit(id=${company.id})}" class="button">Upravit</a></li>
             <li>
                 <form id="deleteForm" th:action="@{/company/{id}(id=${company.id})}" method="post">
                     <label>
-                        <input th:type="submit" th:value="Delete" class="main_b button"
+                        <input th:type="submit" th:value="Delete" class="button"
                                th:data-confirm-delete="|Are you sure, that you want to delete  ${company.name}|"
                                onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
                     </label>
@@ -75,7 +86,7 @@
                     <a th:href="@{/driver/{id}(id=${driver.id})}" th:text="${driver.name}"></a>
                 </li>
             </ul>
-            <a th:href="@{/company/{id}/work(id=${company.id})}" class="main_b button">Select Drivers</a>
+            <a th:href="@{/company/{id}/work(id=${company.id})}" class="button">Select Drivers</a>
         </section>
 
 
