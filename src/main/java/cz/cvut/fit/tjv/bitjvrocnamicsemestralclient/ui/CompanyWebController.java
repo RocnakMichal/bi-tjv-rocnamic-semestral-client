@@ -23,13 +23,6 @@ public class CompanyWebController extends AbstractWebController<CompanyWebModel,
         this.driverClient=driverClient;
     }
 
-
-
-
-
-
-
-
     @GetMapping("/{id}/work")
     public Mono<String> showWork(@PathVariable Long id, Model model) {
         return client.showWork(id)

@@ -34,7 +34,7 @@ public class DriverWebController extends AbstractWebController<DriverWebModel, D
             driverClient.deleteDriversWithoutCars();
             return "redirect:/driver";
         } catch (Exception e) {
-            return "redirect:/error";
+            return "redirect:/driver";
         }
     }
 

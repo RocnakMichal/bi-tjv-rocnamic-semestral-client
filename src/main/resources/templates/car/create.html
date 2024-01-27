@@ -27,7 +27,7 @@
                     async: true,
                 })
                     .done(function(isLicensePlateUnique) {
-                        if (isLicensePlateUnique == false) {
+                        if (isLicensePlateUnique === false) {
                             alert('Error: Licence Plate exists! Please enter a different licence plate.');
                         } else {
                             $('form').unbind('submit').submit();
@@ -89,7 +89,7 @@
     <h1>Create Car</h1>
     <form action="/car/create" method="post" th:object="${car}">
         <label for="licence_plate">Licence Plate:</label>
-        <input type="text" id="licence_plate" name="licence_plate" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
+        <input type="text" id="licence_plate" name="licence_plate" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50" required><br>
 
         <label for="brand">Brand:</label>
         <input type="text" id="brand" name="brand" pattern="[0-9\p{L}\s]+" minlength="3" maxlength="50"><br>
